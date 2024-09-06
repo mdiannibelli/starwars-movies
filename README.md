@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Challenge Frontend Developer 
 
-## Getting Started
+Se requiere realizar una aplicación web con motivo a las películas de Star Wars. 
 
-First, run the development server:
+Los requerimientos son los siguientes: 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Fuente de datos:  
+Se deberá hacer uso de SWAPI, una API con toda la información esperada de los 6 Films 
+de Star  Wars y completamente abierta https://swapi.dev 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Landing Page: 
+Se debe realizar una landing la cual permita ir a la sección de films o a la sección de 
+personajes 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Página de films: 
+Cada film debe tener la siguiente información: 
+    - Nombre
+    - Imagen genérica (debe ser la misma para todos los films) 
+    - Número de episodio 
 
-To learn more about Next.js, take a look at the following resources:
+ 
+## Página de detalle del film: 
+El film debe mostrar la siguiente información: 
+    - Nombre 
+    - Imagen genérica 
+    - Número de episodio 
+    - Director 
+    - Personajes: (deben tener nombre, imagen genérica y url que lleve al detalle de cada personaje) 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Página de personajes: 
+Cada Personaje en la lista debe mostrar las siguientes características: 
+    - Nombre
+    - Imagen genérica (debe ser la misma para todos los personajes) 
+    - Color de Ojos 
+    - Género  
+Se puede implementar un paginado de 10 personajes por página o también un scroll 
+infinito, eso queda a elección del desarrollador.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Filtros: 
+Como plus se pueden implementar los siguientes filtros para la página de personajes: 
+    - Filtro por color de ojos
+    - Filtro por género 
+Nota: Los filtros se deben aplicar en todos los personajes, no en los primeros 10.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Página del detalle de personaje: 
+En la página del personaje se debe mostrar la siguiente información: 
+    - Nombre 
+    - Imagen genérica 
+    - Color de ojos 
+    - Año de cumpleaños 
+    - Color de pelo 
+    - Altura 
+    - Color de piel 
+    - Masa 
+
+
+## Aclaración:  
+Las propiedades que tengan valor “n/a” o “unknown” no deberían mostrarse en la 
+aplicación 
+
+
+## Consideraciones generales: 
+★ Los estilos se deben desarrollar con tailwind. 
+★ Se espera que la aplicación web sea desarrollada con next. 
+★ Se debe usar la api que provee Next. 
+★ El lenguaje de programación es a elección del desarrollador (JavaScript o 
+TypeScript). 
+★ Se debe navegar entre páginas haciendo uso del sistema de rutas del framework. 
+★ Se espera que la data que recibe de SWAPI sea mapeada de acuerdo a como la 
+vista va a mostrar. 
+★ No usar la librería que SWAPI ofrece. 
+★ Como plus, la aplicación puede ser Responsive 
+
+
+## Nomenclatura de commits 
+Los commits deberán tener las siguiente nomenclatura: 
+prefijo(-): mensaje 
+
+Los prefijos pueden ser:  
+• Add: hace referencia a un nuevo archivo/componente/función 
+• Fix: hace referencia a algún arreglo del código 
+• Drop: hace referencia a alguna eliminación de código y/o archivo 
+• Refactor: hace referencia a alguna refactorización del código 
+Ejemplo: add(-): create card component 
+
+Se evaluará 
+➔ Arquitectura (forma de manejar las carpetas dentro del proyecto)  
+➔ Prácticas de nombramiento de métodos y variables. 
+➔ Uso y manejo de datos externos. 
+➔ Uso de Client Side Rendering y Server Side Rendering 
+➔ Uso de Lazy Load para el routing de la aplicación. 
+
+
+Nota final 
+Esta prueba busca definir tu nivel en el manejo de Next, no determina que seas buen@ o 
+mal@, recuerda que por no saber todos los conceptos no necesariamente eres mal@, 
+puedes ayudarte de internet, pero se honest@, trata de escribir todo el código que puedas 
+para que nosotros podamos identificar tu nivel.
