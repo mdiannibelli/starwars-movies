@@ -1,0 +1,1 @@
+export const API_FILMS_URL = 'https://swapi.dev/api/films';

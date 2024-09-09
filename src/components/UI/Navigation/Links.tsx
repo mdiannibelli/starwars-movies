@@ -1,0 +1,24 @@
+'use client';
+
+import { navigationLinks } from "@/constants/navlinks";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const Links = () => {
+    const pathname = usePathname();
+    return (
+        <>
+            {
+                navigationLinks.map((nav, index) => (
+                    <Link key={index} href={nav.url}>
+                        <li className={`${pathname === nav.url ? 'bg-yellow-500 text-black' : 'hover:bg-yellow-500 hover:text-black duration-300'} text-white font-semibold text-md rounded-md border-yellow-500 py-1 px-8 border-[1px]`}>
+                            {nav.title}
+                        </li>
+                    </Link>
+                ))
+            }
+        </>
+    );
+};
+
+export default Links;
