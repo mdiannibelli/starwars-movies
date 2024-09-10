@@ -1,8 +1,9 @@
 'use server';
 
 import { API_FILMS_URL } from "@/constants/apiUrl";
+import { FilmType } from "@/types";
 
-export async function getFilms() {
+export async function getFilms(): Promise<FilmType[]> {
     try {
         const response = await fetch(API_FILMS_URL);
         if (!response.ok) throw new Error(`Response failed at ${API_FILMS_URL}`);

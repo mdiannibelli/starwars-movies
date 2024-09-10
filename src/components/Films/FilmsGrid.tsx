@@ -8,12 +8,12 @@ interface Props {
 }
 
 const FilmsGrid = ({ films }: Props) => {
-    const sortedFilmsByEpisode = films.sort((a, b) => a.episode_id - b.episode_id);
+    //const sortedFilmsByEpisode = films.sort((a, b) => a.episode_id - b.episode_id);
     return (
         <div className="grid grid-cols-3 gap-24 justify-center items-center">
             {
-                sortedFilmsByEpisode.map((film) => (
-                    <Link href={`/films/${film.title}`} key={film.episode_id}>
+                films.map((film, index) => (
+                    <Link href={`/films/${index + 1}`} key={film.episode_id}>
                         <figure>
                             <Image
                                 src={imageFilmsUrls[film.title] || 'https://res.cloudinary.com/dvvtskcux/image/upload/v1725891908/starwars/film-banner.webp'}
