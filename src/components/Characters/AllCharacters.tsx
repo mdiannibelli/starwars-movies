@@ -1,6 +1,8 @@
 'use client';
 
+import { imageCharacterUrls } from '@/constants/imageUrls';
 import { CharacterType } from '@/types';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -12,7 +14,7 @@ const AllCharacters = ({ characters }: Props) => {
     const [viewAllCharacters, setViewAllCharacters] = useState<boolean>(false);
 
     return (
-        <div className="grid grid-cols-6 justify-center gap-8 mt-8 max-w-[1260px] w-full">
+        <div className="grid grid-cols-6 justify-center gap-8 my-12 max-w-[1260px] w-full">
             {
                 !viewAllCharacters ?
 
@@ -30,15 +32,15 @@ const AllCharacters = ({ characters }: Props) => {
                                             /* //TODO getIdFromUrl */
                                             <Link href={`/characters/${index}`} key={index}>
                                                 <figure>
-                                                    {/* //TODO Insertar imagen */}
+                                                    <Image src={imageCharacterUrls[character.name] ?? 'https://res.cloudinary.com/dvvtskcux/image/upload/v1726067493/starwars/characters/404.webp'} alt={character.name} width={240} height={200} className='object-cover w-full h-full max-w-[240px] min-h-[220px] max-h-[220px] bg-center' />
                                                 </figure>
-                                                <div>
+                                                <div className='mt-2'>
                                                     <span className="text-white text-xl font-medium">{character.name}</span>
                                                 </div>
                                             </Link>
                                         ) : <div>
                                             <figure>
-                                                {/* //TODO Insertar imagen por defecto */}
+                                                <Image src='https://res.cloudinary.com/dvvtskcux/image/upload/v1726067493/starwars/characters/404.webp' alt={`Character not found ${index}`} width={240} height={200} className='object-cover w-full h-full max-w-[240px] min-h-[220px] max-h-[220px] bg-center' />
                                             </figure>
                                             <span className="text-white text-xl font-medium">Character not found</span>
                                         </div>

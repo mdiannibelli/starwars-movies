@@ -1,7 +1,7 @@
 import { getCharacters } from "@/app/actions/characters/getCharacters";
 import { getFilmById } from "@/app/actions/films/getFilmById";
 import AllCharacters from "@/components/Characters/AllCharacters";
-import { imageFilmsUrls } from "@/constants/imageUrls";
+import { imageCharacterUrls, imageFilmsUrls } from "@/constants/imageUrls";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,7 +27,6 @@ export default async function page({ params }: Props) {
     function allCharacters() {
         return <AllCharacters characters={characters} />;
     }
-
     const DynamicAllCharacteres = dynamic(async () => allCharacters, { ssr: false });
 
     return (
@@ -52,7 +51,7 @@ export default async function page({ params }: Props) {
 
                     <div className="mt-16 flex justify-center items-center flex-col">
                         <h2 className="text-yellow-500 font-regular text-2xl tracking-wide">Characters</h2>
-                        <div className="grid grid-cols-6 justify-center gap-8 mt-8 max-w-[1260px] w-full">
+                        <div className="grid grid-cols-6 justify-center gap-8 mt-12 max-w-[1260px] w-full">
                             {
                                 characters.slice(0, 6).map((character, index) => (
                                     <>
@@ -61,15 +60,15 @@ export default async function page({ params }: Props) {
                                                 /* //TODO getIdFromUrl */
                                                 <Link href={`/characters/${index}`} key={index}>
                                                     <figure>
-                                                        {/* //TODO Insertar imagen */}
+                                                        <Image src={imageCharacterUrls[character.name] ?? 'https://res.cloudinary.com/dvvtskcux/image/upload/v1726067493/starwars/characters/404.webp'} alt={character.name} width={240} height={200} className='object-cover w-full h-full max-w-[240px] min-h-[220px] max-h-[220px] bg-center' />
                                                     </figure>
-                                                    <div>
+                                                    <div className="mt-2">
                                                         <span className="text-white text-xl font-medium">{character.name}</span>
                                                     </div>
                                                 </Link>
                                             ) : <div>
                                                 <figure>
-                                                    {/* //TODO Insertar imagen por defecto */}
+                                                    <Image src='https://res.cloudinary.com/dvvtskcux/image/upload/v1726067493/starwars/characters/404.webp' alt={`Character not found ${index}`} width={240} height={200} className='object-cover w-full h-full max-w-[240px] min-h-[220px] max-h-[220px] bg-center' />
                                                 </figure>
                                                 <span className="text-white text-xl font-medium">Character not found</span>
                                             </div>
