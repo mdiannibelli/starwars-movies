@@ -2,6 +2,7 @@ import { getCharacters } from "@/app/actions/characters/getCharacters";
 import { getFilmById } from "@/app/actions/films/getFilmById";
 import AllCharacters from "@/components/Characters/AllCharacters";
 import { imageCharacterUrls, imageFilmsUrls } from "@/constants/imageUrls";
+import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +13,19 @@ interface Props {
     }
 }
 
-//TODO INSERT DYNAMIC METADATA
+// Metadata
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const id = params.id;
+    const film = await getFilmById(id);
+    return {
+        title: `${film.title} - Star Wars`,
+        description: film.opening_crawl,
+        openGraph: {
+            images: [imageFilmsUrls[film.title]]
+        }
+    };
+
+}
 
 
 export default async function page({ params }: Props) {
