@@ -1,4 +1,5 @@
 import { imageFilmsUrls } from "@/constants/imageUrls";
+import { getIdFromUrl } from "@/hooks/useGetIdFromUrl";
 import { FilmType } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,8 +13,8 @@ const FilmsGrid = ({ films }: Props) => {
     return (
         <div className="grid grid-cols-3 gap-24 justify-center items-center">
             {
-                films.map((film, index) => (
-                    <Link href={`/films/${index + 1}`} key={film.episode_id}>
+                films.map((film) => (
+                    <Link href={`/films/${getIdFromUrl({ query: { url: film.url, q: "films" } })}`} key={film.episode_id}>
                         <figure>
                             <Image
                                 src={imageFilmsUrls[film.title] || 'https://res.cloudinary.com/dvvtskcux/image/upload/v1725891908/starwars/film-banner.webp'}

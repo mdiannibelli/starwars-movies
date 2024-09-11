@@ -2,6 +2,7 @@ import { getCharacters } from "@/app/actions/characters/getCharacters";
 import { getFilmById } from "@/app/actions/films/getFilmById";
 import AllCharacters from "@/components/Characters/AllCharacters";
 import { imageCharacterUrls, imageFilmsUrls } from "@/constants/imageUrls";
+import { getIdFromUrl } from "@/hooks/useGetIdFromUrl";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -70,8 +71,7 @@ export default async function page({ params }: Props) {
                                     <>
                                         {
                                             character ? (
-                                                /* //TODO getIdFromUrl */
-                                                <Link href={`/characters/${index}`} key={index}>
+                                                <Link href={`/characters/${getIdFromUrl({ query: { url: character.url, q: "people" } })}`} key={index}>
                                                     <figure>
                                                         <Image src={imageCharacterUrls[character.name] ?? 'https://res.cloudinary.com/dvvtskcux/image/upload/v1726067493/starwars/characters/404.webp'} alt={character.name} width={240} height={200} className='object-cover w-full h-full max-w-[240px] min-h-[220px] max-h-[220px] bg-center' />
                                                     </figure>
