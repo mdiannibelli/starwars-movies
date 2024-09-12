@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Star Wars movies",
+  title: "Star Wars Wiki - Fan Site",
   description: "Website containing all Star Wars movies with details.",
 };
 

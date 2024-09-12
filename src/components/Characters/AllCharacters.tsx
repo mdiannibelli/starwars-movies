@@ -1,11 +1,8 @@
 'use client';
 
-import { imageCharacterUrls } from '@/constants/imageUrls';
-import { getIdFromUrl } from '@/hooks/useGetIdFromUrl';
 import { CharacterType } from '@/types';
-import Image from 'next/image';
-import Link from 'next/link';
 import React, { useState } from 'react';
+import CharacterCard from './CharacterCard';
 
 interface Props {
     characters: CharacterType[]
@@ -19,7 +16,7 @@ const AllCharacters = ({ characters }: Props) => {
             {
                 !viewAllCharacters ?
 
-                    <button className='text-white font-light text-xl col-span-6 my-12' onClick={() => setViewAllCharacters(true)}>
+                    <button className='text-white font-light text-xl col-span-6 my-6' onClick={() => setViewAllCharacters(true)}>
                         Show all characters
                     </button>
 
@@ -28,27 +25,11 @@ const AllCharacters = ({ characters }: Props) => {
                         {
                             characters.slice(6).map((character, index) => (
                                 <>
-                                    {
-                                        character ? (
-                                            <Link href={`/characters/${getIdFromUrl({ query: { url: character.url, q: "people" } })}`} key={index}>
-                                                <figure>
-                                                    <Image src={imageCharacterUrls[character.name] ?? 'https://res.cloudinary.com/dvvtskcux/image/upload/v1726067493/starwars/characters/404.webp'} alt={character.name} width={240} height={200} className='object-cover w-full h-full max-w-[240px] min-h-[220px] max-h-[220px] bg-center' />
-                                                </figure>
-                                                <div className='mt-2'>
-                                                    <span className="text-white text-xl font-medium">{character.name}</span>
-                                                </div>
-                                            </Link>
-                                        ) : <div>
-                                            <figure>
-                                                <Image src='https://res.cloudinary.com/dvvtskcux/image/upload/v1726067493/starwars/characters/404.webp' alt={`Character not found ${index}`} width={240} height={200} className='object-cover w-full h-full max-w-[240px] min-h-[220px] max-h-[220px] bg-center' />
-                                            </figure>
-                                            <span className="text-white text-xl font-medium">Character not found</span>
-                                        </div>
-                                    }
+                                    <CharacterCard key={character.name} character={character} index={index} />
                                 </>
                             ))
                         }
-                        <button className='text-white font-light text-xl col-span-6 my-12' onClick={() => setViewAllCharacters(false)}>Show less</button>
+                        <button className='text-white font-light text-xl col-span-6 my-6' onClick={() => setViewAllCharacters(false)}>Show less</button>
                     </>
             }
         </div>
