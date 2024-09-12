@@ -8,7 +8,12 @@ import CharacterCard from './CharacterCard';
 
 let page = 2;
 
-const LoadMoreCharacters = () => {
+interface Props {
+    gender?: string
+    eye_color?: string
+}
+
+const LoadMoreCharacters = ({ gender, eye_color }: Props) => {
     const [characters, setAllCharacters] = useState<CharacterType[]>([]);
     const { ref, inView } = useInView();
 
@@ -26,9 +31,14 @@ const LoadMoreCharacters = () => {
     return (
         <>
             {
-                characters.map((character, index) => (
-                    <CharacterCard key={character.name} character={character} index={index} />
-                ))
+                characters
+                    .filter(ch => {
+                        (!eye_color || ch.eye_color.includes(eye_color)) &&
+                            (!gender || ch.gender === gender);
+                    })
+                    .map((character, index) => (
+                        <CharacterCard key={character.name} character={character} index={index} />
+                    ))
             }
             {page < 10 &&
                 <div className='flex justify-center items-center w-full' ref={ref}>

@@ -2,17 +2,28 @@ import CharactersGrid from '@/components/Characters/CharactersGrid';
 import React from 'react';
 import { getAllCharacters } from '../actions/characters/getAllCharacters';
 import { Metadata } from 'next';
+import CharactersFilters from '@/components/Filters/CharactersFilters';
 
 export const metadata: Metadata = {
     title: "Star Wars - Characters",
     description: "All Star Wars characters.",
 };
 
-export default async function page() {
+interface Props {
+    searchParams?: {
+        gender?: string
+        eye_color?: string
+    }
+}
+
+export default async function page({ searchParams }: Props) {
     const characters = await getAllCharacters(1);
+    const gender = searchParams?.gender;
+    const eye_color = searchParams?.eye_color;
     return (
         <main>
-            <CharactersGrid characters={characters} />
+            <CharactersFilters />
+            <CharactersGrid characters={characters} gender={gender} eye_color={eye_color} />
         </main>
     );
 }
