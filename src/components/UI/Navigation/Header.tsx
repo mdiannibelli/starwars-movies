@@ -5,7 +5,7 @@ import Links from './Links';
 
 const Header = () => {
     return (
-        <header className='flex justify-around items-center py-8 px-16'>
+        <header className='flex justify-around items-center p-4 md:py-8 md:px-16'>
             <div className=''>
                 <Link href='/' className='flex items-center flex-col'>
                     <Image width={150} height={100} src='/starwars-logo.png' alt="Star Wars Logo" />

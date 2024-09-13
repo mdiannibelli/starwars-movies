@@ -1,8 +1,8 @@
+import { redirect } from "next/navigation";
 
 export default function Home() {
+  redirect('/films');
   return (
-    <main>
-      <span className="text-yellow-500">Home</span>
-    </main>
+    <></>
   );
 }

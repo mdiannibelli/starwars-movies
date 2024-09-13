@@ -12,13 +12,15 @@ const AllCharacters = ({ characters }: Props) => {
     const [viewAllCharacters, setViewAllCharacters] = useState<boolean>(false);
 
     return (
-        <div className="grid grid-cols-6 justify-center gap-8 my-12 max-w-[1260px] w-full">
+        <>
             {
                 !viewAllCharacters ?
+                    <div className='w-full justify-center flex'>
+                        <button className='text-white font-light text-xl my-6' onClick={() => setViewAllCharacters(true)}>
+                            Show all characters
+                        </button>
 
-                    <button className='text-white font-light text-xl col-span-6 my-6' onClick={() => setViewAllCharacters(true)}>
-                        Show all characters
-                    </button>
+                    </div>
 
                     :
                     <>
@@ -29,10 +31,13 @@ const AllCharacters = ({ characters }: Props) => {
                                 </>
                             ))
                         }
-                        <button className='text-white font-light text-xl col-span-6 my-6' onClick={() => setViewAllCharacters(false)}>Show less</button>
+                        <div className='w-full justify-center flex'>
+                            <button className='text-white font-light text-xl my-6' onClick={() => setViewAllCharacters(false)}>Show less</button>
+                        </div>
+
                     </>
             }
-        </div>
+        </>
     );
 };
 

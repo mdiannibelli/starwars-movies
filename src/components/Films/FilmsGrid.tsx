@@ -11,7 +11,7 @@ interface Props {
 const FilmsGrid = ({ films }: Props) => {
     //const sortedFilmsByEpisode = films.sort((a, b) => a.episode_id - b.episode_id);
     return (
-        <div className="grid grid-cols-3 gap-24 justify-center items-center">
+        <div className="grid grid-cols-1 px-6 md:px-12 md:grid-cols-2 xl:grid-cols-3 gap-24 justify-center items-center">
             {
                 films.map((film) => (
                     <Link href={`/films/${getIdFromUrl({ query: { url: film.url, q: "films" } })}`} key={film.episode_id}>

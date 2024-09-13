@@ -71,7 +71,7 @@ const CharactersFilters = () => {
     }; */
 
     return (
-        <form onSubmit={handleSubmit} className='flex justify-center items-center gap-x-12'>
+        <form onSubmit={handleSubmit} className='flex flex-wrap gap-4 md:gap-8 justify-center items-center gap-x-12'>
             <div>
                 <label className='text-white text-2xl mr-8' htmlFor="gender">Gender</label>
                 <select

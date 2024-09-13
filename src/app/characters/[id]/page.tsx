@@ -5,6 +5,7 @@ import { getVehicles } from '@/app/actions/vehicles/getVehicles';
 import { imageCharacterUrls } from '@/constants/imageUrls';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { IoIosFemale, IoIosMale } from 'react-icons/io';
 
@@ -42,7 +43,7 @@ export default async function page({ params }: Props) {
         <main>
             {
                 character ? (
-                    <section className='grid grid-cols-[auto_1fr] justify-items-center max-w-[720px] mx-auto'>
+                    <section className='grid grid-cols-1 gap-y-12 md:gap-y-0 my-12 md:my-0 md:grid-cols-[auto_1fr] justify-items-center max-w-[720px] mx-auto'>
                         <div>
                             <figure>
                                 <Image src={imageCharacterUrls[character.name] ?? 'https://res.cloudinary.com/dvvtskcux/image/upload/v1726067493/starwars/characters/404.webp'} alt={character.name} width={320} height={380} className='object-cover rounded-md w-[320px] h-[380px] bg-center' />
@@ -125,6 +126,10 @@ export default async function page({ params }: Props) {
                     </section>
                 ) : <span className='text-yellow-500 text-2xl'>Character not found!</span>
             }
+
+            <div className='flex justify-center my-16'>
+                <Link href='/characters' className='py-2 px-8 text-yellow-500 bg-transparent border-[1.5px] rounded-md border-yellow-500 text-md hover:bg-yellow-500 hover:text-black duration-300'>Back to characters</Link>
+            </div>
         </main>
     );
 }

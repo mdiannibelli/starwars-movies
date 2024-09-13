@@ -12,7 +12,7 @@ interface Props {
 
 const CharactersGrid = ({ characters, gender, eye_color, name }: Props) => {
     return (
-        <section className='grid grid-cols-3 max-w-[924px] mx-auto my-8 justify-items-center'>
+        <section className='grid grid-cols-2 md:grid-cols-3 max-w-[924px] mx-auto my-8 justify-items-center'>
             {
                 characters
                     .filter(ch =>
