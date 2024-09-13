@@ -43,7 +43,7 @@ export default async function page({ params }: Props) {
     const DynamicAllCharacteres = dynamic(async () => allCharacters, { ssr: false });
 
     return (
-        <>
+        <main>
             {film &&
                 <section className="flex flex-col justify-center p-6">
                     <div className="grid grid-cols-[auto_1fr] mx-auto gap-x-8">
@@ -75,6 +75,6 @@ export default async function page({ params }: Props) {
                     </div>
                 </section>
             }
-        </>
+        </main>
     );
 }
