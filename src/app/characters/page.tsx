@@ -13,6 +13,7 @@ interface Props {
     searchParams?: {
         gender?: string
         eye_color?: string
+        name?: string
     }
 }
 
@@ -20,10 +21,11 @@ export default async function page({ searchParams }: Props) {
     const characters = await getAllCharacters(1);
     const gender = searchParams?.gender;
     const eye_color = searchParams?.eye_color;
+    const name = searchParams?.name;
     return (
         <main>
             <CharactersFilters />
-            <CharactersGrid characters={characters} gender={gender} eye_color={eye_color} />
+            <CharactersGrid characters={characters} gender={gender} eye_color={eye_color} name={name} />
         </main>
     );
 }

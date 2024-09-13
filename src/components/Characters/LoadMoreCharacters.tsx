@@ -11,9 +11,10 @@ let page = 2;
 interface Props {
     gender?: string
     eye_color?: string
+    name?: string
 }
 
-const LoadMoreCharacters = ({ gender, eye_color }: Props) => {
+const LoadMoreCharacters = ({ gender, eye_color, name }: Props) => {
     const [characters, setAllCharacters] = useState<CharacterType[]>([]);
     const { ref, inView } = useInView();
 
@@ -35,7 +36,8 @@ const LoadMoreCharacters = ({ gender, eye_color }: Props) => {
                     characters
                         .filter(ch =>
                             (!eye_color || ch.eye_color.includes(eye_color)) &&
-                            (!gender || ch.gender === gender))
+                            (!gender || ch.gender === gender) &&
+                            (!name || ch.name.toLowerCase().includes(name.toLowerCase())))
                         .map((character, index) => (
 
                             <CharacterCard key={character.name} character={character} index={index} />

@@ -1,12 +1,37 @@
 'use client';
 
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const CharactersFilters = () => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
+
+    const [searchTerm, setSearchTerm] = useState(searchParams.get('name') || '');
+    const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
+
+    // Delay 1s
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setDebouncedSearch(searchTerm);
+        }, 1000);
+
+        return () => clearTimeout(timeout);
+    }, [searchTerm]);
+
+    // Update params after debounce
+    useEffect(() => {
+        const params = new URLSearchParams(searchParams);
+        if (debouncedSearch) {
+            params.set('name', debouncedSearch);
+        } else {
+            params.delete('name');
+        }
+
+        replace(`${pathname}?${params.toString()}`);
+    }, [debouncedSearch, searchParams, pathname, replace]);
+
 
     const handleSearchGender = (filter: string) => {
         const params = new URLSearchParams(searchParams);
@@ -30,8 +55,23 @@ const CharactersFilters = () => {
         replace(`${pathname}?${params.toString()}`);
     };
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    };
+
+    /* const handleSearchName = (filter: string) => {
+        const params = new URLSearchParams(searchParams);
+        if (filter !== '') {
+            params.set('name', filter);
+        } else {
+            params.delete('name');
+        }
+
+        replace(`${pathname}?${params.toString()}`);
+    }; */
+
     return (
-        <form className='flex justify-center items-center gap-x-12'>
+        <form onSubmit={handleSubmit} className='flex justify-center items-center gap-x-12'>
             <div>
                 <label className='text-white text-2xl mr-8' htmlFor="gender">Gender</label>
                 <select
@@ -67,6 +107,15 @@ const CharactersFilters = () => {
                     <option className='bg-black text-yellow-500' value="brown">Brown</option>
                     <option className='bg-black text-yellow-500' value="hazel">Hazel</option>
                 </select>
+            </div>
+            <div>
+                <input
+                    type="text"
+                    name='name'
+                    id='name'
+                    className='rounded py-1 px-6 select-none outline-none border-[1.5px] border-yellow-500 bg-transparent text-white'
+                    placeholder='Search character...'
+                    onChange={(e) => setSearchTerm(e.target.value)} />
             </div>
         </form>
     );
