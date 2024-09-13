@@ -18,9 +18,9 @@ const CharactersGrid = ({ characters, gender, eye_color }: Props) => {
                         (!eye_color || ch.eye_color.includes(eye_color)) &&
                         (!gender || ch.gender === gender))
                     .map((character, index) => (
-                        <>
-                            <CharacterCard key={character.name} character={character} index={index} />
-                        </>
+
+                        <CharacterCard key={character.name} character={character} index={index} />
+
                     ))
             }
             <LoadMoreCharacters gender={gender} eye_color={eye_color} />

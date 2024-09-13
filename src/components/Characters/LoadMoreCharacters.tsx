@@ -2,7 +2,7 @@
 
 import { getAllCharacters } from '@/app/actions/characters/getAllCharacters';
 import { CharacterType } from '@/types';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import CharacterCard from './CharacterCard';
 
@@ -30,18 +30,21 @@ const LoadMoreCharacters = ({ gender, eye_color }: Props) => {
 
     return (
         <>
-            {
-                characters
-                    .filter(ch => {
-                        (!eye_color || ch.eye_color.includes(eye_color)) &&
-                            (!gender || ch.gender === gender);
-                    })
-                    .map((character, index) => (
-                        <CharacterCard key={character.name} character={character} index={index} />
-                    ))
-            }
+            <Suspense fallback={<span className='text-white'>Loading characters...</span>} key={`${gender}-${eye_color}`}>
+                {
+                    characters
+                        .filter(ch =>
+                            (!eye_color || ch.eye_color.includes(eye_color)) &&
+                            (!gender || ch.gender === gender))
+                        .map((character, index) => (
+
+                            <CharacterCard key={character.name} character={character} index={index} />
+
+                        ))
+                }
+            </Suspense>
             {page < 10 &&
-                <div className='flex justify-center items-center w-full' ref={ref}>
+                <div ref={ref} className='flex justify-center items-center w-full'>
                     <span className='text-white text-center'>Loading...</span>
                 </div>
             }
