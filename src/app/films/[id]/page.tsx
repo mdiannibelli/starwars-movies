@@ -1,17 +1,23 @@
 import { getCharacters } from "@/app/actions/characters/getCharacters";
 import { getFilmById } from "@/app/actions/films/getFilmById";
-import AllCharacters from "@/components/Characters/AllCharacters";
 import CharacterCard from "@/components/Characters/CharacterCard";
 import { imageFilmsUrls } from "@/constants/imageUrls";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { Suspense } from "react";
 
 interface Props {
     params: {
         id: number
     }
 }
+
+// Load dynamic component AllCharacters
+const AllCharacters = dynamic(() => import("@/components/Characters/AllCharacters"), {
+    ssr: false,
+    loading: () => <p className="text-white">Loading characters...</p>
+});
 
 // Metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -36,12 +42,6 @@ export default async function page({ params }: Props) {
     // Get characters (6)
     const characters = await getCharacters(film.characters);
 
-    // Dynamic characters
-    function allCharacters() {
-        return <AllCharacters characters={characters} />;
-    }
-    const DynamicAllCharacteres = dynamic(async () => allCharacters, { ssr: false });
-
     return (
         <main>
             {film &&
@@ -53,7 +53,8 @@ export default async function page({ params }: Props) {
                                 alt={film.title}
                                 width={520}
                                 height={220}
-                                className="h-[320px] w-full object-cover" />
+                                className="h-[320px] w-full object-cover"
+                                loading="lazy" />
                         </figure>
                         <div className="flex flex-col md:w-[520px] m-4">
                             <h1 className="font-medium text-2xl md:text-4xl xl:text-6xl text-white">{film.title}</h1>
@@ -70,7 +71,9 @@ export default async function page({ params }: Props) {
                                     <CharacterCard key={character.name} character={character} index={index} />
                                 ))
                             }
-                            <DynamicAllCharacteres />
+                            <Suspense fallback={<p className="text-white">Loading characters...</p>}>
+                                <AllCharacters characters={characters} />
+                            </Suspense>
                         </div>
                     </div>
                 </section>

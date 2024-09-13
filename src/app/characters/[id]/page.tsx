@@ -46,7 +46,13 @@ export default async function page({ params }: Props) {
                     <section className='grid grid-cols-1 gap-y-12 md:gap-y-0 my-12 md:my-0 md:grid-cols-[auto_1fr] justify-items-center max-w-[720px] mx-auto'>
                         <div>
                             <figure>
-                                <Image src={imageCharacterUrls[character.name] ?? 'https://res.cloudinary.com/dvvtskcux/image/upload/v1726067493/starwars/characters/404.webp'} alt={character.name} width={320} height={380} className='object-cover rounded-md w-[320px] h-[380px] bg-center' />
+                                <Image
+                                    src={imageCharacterUrls[character.name] ?? 'https://res.cloudinary.com/dvvtskcux/image/upload/v1726067493/starwars/characters/404.webp'}
+                                    alt={character.name}
+                                    width={320}
+                                    height={380}
+                                    className='object-cover rounded-md w-[320px] h-[380px] bg-center'
+                                    loading="lazy" />
                             </figure>
                         </div>
                         <aside>
